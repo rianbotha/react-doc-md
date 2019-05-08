@@ -1,0 +1,35 @@
+{
+  "name": "@rianbotha/react-doc-md",
+  "version": "1.0.0",
+  "description": "A markdown readme generator for React components.",
+  "main": "index.js",
+  "bin": {
+    "doc-md": "index.js"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rianbotha/react-doc-md.git"
+  },
+  "keywords": [
+    "react",
+    "readme",
+    "documentation-generation",
+    "props",
+    "markdown",
+    "table",
+    "generator"
+  ],
+  "author": "Rian Botha",
+  "license": "MIT",
+  "homepage": "https://github.com/rianbotha/react-doc-md#readme",
+  "dependencies": {
+    "@babel/parser": "^7.4.4",
+    "chalk": "^2.4.2",
+    "react-docgen": "^4.1.1",
+    "uppercamelcase": "^3.0.0",
+    "yargs": "^13.2.2"
+  }
+}
