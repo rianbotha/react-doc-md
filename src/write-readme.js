@@ -5,11 +5,13 @@ const chalk = require('chalk');
 const writeReadme = (readme, doc, regex, force) => {
   try {
     let readmeContent = '';
+    let fileExists = false;
 
     if(!fs.existsSync(readme)) {
-      console.warn(chalk.yellow(`${readme} not found.`));
+      console.warn(chalk.yellow(`${readme} not found and will be created`));
     } else {
       readmeContent = fs.readFileSync(path.resolve(process.cwd(), readme), 'utf-8');
+      fileExists = true;
     }
 
     if (readmeContent.match(regex)) {
@@ -26,7 +28,7 @@ const writeReadme = (readme, doc, regex, force) => {
         }
       });
     } else {
-      if (force) {
+      if (force || !fileExists) {
         const result = '<!-- doc-md-start -->\n' + doc + '<!-- doc-md-end -->';
 
         fs.writeFile(readme, result, 'utf-8', (e) => {
