@@ -35,7 +35,7 @@ const writeReadme = (readme, doc, regex, force) => {
           if (e) {
             return console.error(chalk.red(`Error updating ${readme}: ${e}`));
           } else {
-            return console.log(chalk.green(`${readme} force updated successfully.`));
+            return console.log(chalk.green(`${readme} written successfully.`));
           }
         });
       } else {
