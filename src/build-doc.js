@@ -10,6 +10,7 @@ const stripComments = require('./strip-comments');
 const formatType = require('./format-type');
 const nlToBr = require('./nl-to-br');
 const addLine = require('./add-line');
+const buildShapeDoc = require('./build-shape-doc');
 
 
 const buildDoc = (filename, root) => {
@@ -63,7 +64,7 @@ const buildDoc = (filename, root) => {
 
           if (isShape || isShapeArray) {
             shapes.push({
-              component: displayName,
+              parent: displayName,
               title: name,
               value: isShapeArray ? type.value.value : type.value,
               isShapeArray,
@@ -71,30 +72,7 @@ const buildDoc = (filename, root) => {
           }
         }
 
-        shapes.forEach((shape) => {
-          doc = addLine(doc);
-          doc = addLine(doc);
-          doc = addLine(doc, `### <a name="${shape.component}-${shape.title}"></a> ${shape.title}`);
-          doc = addLine(doc);
-
-          if (shape.isShapeArray) {
-            doc = addLine(doc, 'An array of:');
-            doc = addLine(doc);
-          }
-
-          if (Object.keys(shape.value).length > 0) {
-            doc = addLine(doc, '| Property | PropType | Required | Description |');
-            doc = addLine(doc, '|----------|----------|----------|-------------|');
-
-
-            for (const prop of Object.keys(shape.value)) {
-              const { name, required, description = '', defaultValue } = shape.value[prop];
-              doc = addLine(doc, `| ${prop} | ${formatType(shape.value[prop])} | ${required ? 'yes' : ''} | ${nlToBr(description)} |`);
-            }
-          } else {
-            doc = addLine(doc, 'The structure has not been defined.');
-          }
-        });
+        doc = addLine(doc, buildShapeDoc(shapes));
       } else {
         doc = addLine(doc, 'This component has no properties');
       }
