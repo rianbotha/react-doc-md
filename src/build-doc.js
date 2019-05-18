@@ -52,10 +52,41 @@ const buildDoc = (filename, root) => {
         doc = addLine(doc, '| Property | PropType | Required | Default | Description |');
         doc = addLine(doc, '|----------|----------|----------|---------|-------------|');
 
+        const shapes = [];
+
         for (const name of Object.keys(component.props)) {
           const { type, required, description, defaultValue } = component.props[name];
-          doc = addLine(doc, `| ${name} | \`${formatType(type)}\` | ${required ? 'yes' : ''} | ${defaultValue != null ? `\`${nlToBr(stripComments(defaultValue.value), true)}\`` : ''} | ${nlToBr(description)} |`);
+          const propType = type.name === 'shape' ? `[${formatType(type)}](#${displayName}-${name})` : `${formatType(type)}`;
+          doc = addLine(doc, `| ${name} | ${propType} | ${required ? 'yes' : ''} | ${defaultValue != null ? `\`${nlToBr(stripComments(defaultValue.value), true)}\`` : ''} | ${nlToBr(description)} |`);
+
+          if (type.name === 'shape') {
+            shapes.push({
+              component: displayName,
+              title: name,
+              value: type.value,
+            })
+          }
         }
+
+        shapes.forEach((shape) => {
+          doc = addLine(doc);
+          doc = addLine(doc);
+          doc = addLine(doc, `### <a name="${shape.component}-${shape.title}"></a> ${shape.title}`);
+          doc = addLine(doc);
+
+          if (Object.keys(shape.value).length > 0) {
+            doc = addLine(doc, '| Property | PropType | Required | Description |');
+            doc = addLine(doc, '|----------|----------|----------|-------------|');
+
+
+            for (const prop of Object.keys(shape.value)) {
+              const { name, required, description = '', defaultValue } = shape.value[prop];
+              doc = addLine(doc, `| ${prop} | ${formatType(shape.value[prop])} | ${required ? 'yes' : ''} | ${nlToBr(description)} |`);
+            }
+          } else {
+            doc = addLine(doc, 'The structure has not been defined.');
+          }
+        });
       } else {
         doc = addLine(doc, 'This component has no properties');
       }
