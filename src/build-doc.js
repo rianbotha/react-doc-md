@@ -59,8 +59,8 @@ const buildDoc = (filename, root) => {
           const { type, required, description, defaultValue } = component.props[name];
           const isShape = type.name === 'shape';
           const isShapeArray = type.name === 'arrayOf' && type.value.name === 'shape';
-          const propType = isShape || isShapeArray ? `[${formatType(type)}](#${displayName}-${name})` : `${formatType(type)}`;
-          doc = addLine(doc, `| ${name} | ${propType} | ${required ? 'yes' : ''} | ${defaultValue != null ? `\`${nlToBr(stripComments(defaultValue.value), true)}\`` : ''} | ${nlToBr(description)} |`);
+          const propName = isShape || isShapeArray ? `[${name}](#${displayName}-${name})` : name;
+          doc = addLine(doc, `| ${propName} | ${formatType(type)} | ${required ? 'yes' : ''} | ${defaultValue != null ? `\`${nlToBr(stripComments(defaultValue.value), true)}\`` : ''} | ${nlToBr(description)} |`);
 
           if (isShape || isShapeArray) {
             shapes.push({

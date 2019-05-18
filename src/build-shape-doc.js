@@ -26,8 +26,8 @@ const buildShapeDoc = (shapes) => {
         const { name, required, description = '', defaultValue } = shape.value[prop];
         const isShape = name === 'shape';
         const isShapeArray = name === 'arrayOf' && shape.value[prop].value.name === 'shape';
-        const propType = isShape || isShapeArray ? `[${formatType(shape.value[prop])}](#${shape.parent}-${shape.title}-${prop})` : `${formatType(shape.value[prop])}`;
-        doc = addLine(doc, `| ${prop} | ${propType} | ${required ? 'yes' : ''} | ${nlToBr(description)} |`);
+        const propName = isShape || isShapeArray ? `[${prop}](#${shape.parent}-${shape.title}-${prop})` : prop;
+        doc = addLine(doc, `| ${propName} | ${formatType(shape.value[prop])} | ${required ? 'yes' : ''} | ${nlToBr(description)} |`);
 
         if (isShape || isShapeArray) {
           nestedShapes.push({
