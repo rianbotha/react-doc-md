@@ -56,14 +56,17 @@ const buildDoc = (filename, root) => {
 
         for (const name of Object.keys(component.props)) {
           const { type, required, description, defaultValue } = component.props[name];
-          const propType = type.name === 'shape' ? `[${formatType(type)}](#${displayName}-${name})` : `${formatType(type)}`;
+          const isShape = type.name === 'shape';
+          const isShapeArray = type.name === 'arrayOf' && type.value.name === 'shape';
+          const propType = isShape || isShapeArray ? `[${formatType(type)}](#${displayName}-${name})` : `${formatType(type)}`;
           doc = addLine(doc, `| ${name} | ${propType} | ${required ? 'yes' : ''} | ${defaultValue != null ? `\`${nlToBr(stripComments(defaultValue.value), true)}\`` : ''} | ${nlToBr(description)} |`);
 
-          if (type.name === 'shape') {
+          if (isShape || isShapeArray) {
             shapes.push({
               component: displayName,
               title: name,
-              value: type.value,
+              value: isShapeArray ? type.value.value : type.value,
+              isShapeArray,
             })
           }
         }
@@ -73,6 +76,11 @@ const buildDoc = (filename, root) => {
           doc = addLine(doc);
           doc = addLine(doc, `### <a name="${shape.component}-${shape.title}"></a> ${shape.title}`);
           doc = addLine(doc);
+
+          if (shape.isShapeArray) {
+            doc = addLine(doc, 'An array of:');
+            doc = addLine(doc);
+          }
 
           if (Object.keys(shape.value).length > 0) {
             doc = addLine(doc, '| Property | PropType | Required | Description |');
