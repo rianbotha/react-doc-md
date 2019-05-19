@@ -1,5 +1,6 @@
 # react-doc-md
 
+[![npm version](https://img.shields.io/npm/v/%40rianbotha%2Freact-doc-md.svg?style=flat)](https://www.npmjs.com/package/%40rianbotha%2Freact-doc-md)
 [![Known Vulnerabilities](https://snyk.io/test/github/rianbotha/react-doc-md/badge.svg?targetFile=package.json)](https://snyk.io/test/github/rianbotha/react-doc-md?targetFile=package.json)
 
 Generate readme.md files for React components using [react-docgen][].

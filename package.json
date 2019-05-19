@@ -1,6 +1,6 @@
 {
   "name": "@rianbotha/react-doc-md",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "A markdown readme generator for React components.",
   "main": "index.js",
   "bin": {
