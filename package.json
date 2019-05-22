@@ -26,7 +26,7 @@
   "license": "MIT",
   "homepage": "https://github.com/rianbotha/react-doc-md#readme",
   "dependencies": {
-    "@babel/parser": "^7.4.4",
+    "@babel/parser": "^7.4.5",
     "chalk": "^2.4.2",
     "react-docgen": "^4.1.1",
     "uppercamelcase": "^3.0.0",
