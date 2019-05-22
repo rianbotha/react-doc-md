@@ -11,6 +11,11 @@ const buildShapeDoc = (shapes) => {
     doc = addLine(doc, `###${(shape.parent.match(/-/g) || []).map(() => '#').join('')} <a name="${shape.parent}-${shape.title}"></a> ${shape.title}`);
     doc = addLine(doc);
 
+    if (shape.description) {
+      doc = addLine(doc, shape.description);
+      doc = addLine(doc);
+    }
+
     if (shape.isShapeArray) {
       doc = addLine(doc, 'An array of:');
       doc = addLine(doc);
@@ -34,12 +39,15 @@ const buildShapeDoc = (shapes) => {
             parent: `${shape.parent}-${shape.title}`,
             title: prop,
             value: isShapeArray ? shape.value[prop].value.value : shape.value[prop].value,
+            description,
             isShapeArray,
           })
         }
 
-        const nestedShapeDoc = buildShapeDoc(nestedShapes);
-        if (nestedShapeDoc) doc = addLine(doc, nestedShapeDoc);
+        if (nestedShapes.length > 0) {
+          const nestedShapeDoc = buildShapeDoc(nestedShapes);
+          if (nestedShapeDoc) doc = addLine(doc, nestedShapeDoc, true);
+        }
       }
     } else {
       doc = addLine(doc, 'The structure has not been defined.');

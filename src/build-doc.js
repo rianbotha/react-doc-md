@@ -67,6 +67,7 @@ const buildDoc = (filename, root) => {
               parent: displayName,
               title: name,
               value: isShapeArray ? type.value.value : type.value,
+              description,
               isShapeArray,
             })
           }

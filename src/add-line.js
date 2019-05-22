@@ -1,5 +1,5 @@
-const addLine = (source, strToAdd = '',) => (
-  source + strToAdd + '\n'
+const addLine = (source, strToAdd = '', noNewLine = false) => (
+  `${source}${strToAdd}${noNewLine ? '' : '\n'}`
 );
 
 module.exports = addLine;
