@@ -29,8 +29,8 @@ The documentation needs to be wrapped between `<!-- doc-md-start -->` and `<!-- 
 
 ### Options
 
-* `--exclude` A filename or glob to exclude. You can comma separate a list. Make sure to wrap globs in quotes..
+* `--exclude` A filename or glob to exclude. You can comma separate a list. Make sure to wrap globs in quotes.
 * `--to-console` will write the props table to the terminal instead of the file.
-* `--force` Overwrite the current readme if it exists and start and end comments are missing..
+* `--force` Overwrite the current readme if it exists and start and end comments are missing.
 * `--help` or `-h` display usage options
 * `--version` or `-v` display version information
