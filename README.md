@@ -17,9 +17,11 @@ Run the following command in the terminal to replace or create a `readme.md` in 
 ```
 doc-md path/to/index.js path
 ```
-First argument is the path to the file containing your React component(s).
+The first argument is the path to the file containing your React component(s) or a glob. It can be a comma separated list.
 
-Second argument is the base path from which the import path will be calculated.
+> Note: Globs needs to be wrapped in quotes.
+
+The second argument is the base path from which the import path will be calculated.
 
 If the file is named index.js the readme.md will be name readme.md. Otherwise the readme will be name filename.md to match your file.
 
@@ -27,6 +29,7 @@ The documentation needs to be wrapped between `<!-- doc-md-start -->` and `<!-- 
 
 ### Options
 
+* `--exclude` A filename or glob to exclude. You can comma separate a list. Make sure to wrap globs in quotes..
 * `--to-console` will write the props table to the terminal instead of the file.
 * `--force` Overwrite the current readme if it exists and start and end comments are missing..
 * `--help` or `-h` display usage options
