@@ -43,11 +43,11 @@ const buildShapeDoc = (shapes) => {
             isShapeArray,
           })
         }
+      }
 
-        if (nestedShapes.length > 0) {
-          const nestedShapeDoc = buildShapeDoc(nestedShapes);
-          if (nestedShapeDoc) doc = addLine(doc, nestedShapeDoc, true);
-        }
+      if (nestedShapes.length > 0) {
+        const nestedShapeDoc = buildShapeDoc(nestedShapes);
+        if (nestedShapeDoc) doc = addLine(doc, nestedShapeDoc, true);
       }
     } else {
       doc = addLine(doc, 'The structure has not been defined.');
