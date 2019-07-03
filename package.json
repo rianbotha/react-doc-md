@@ -1,6 +1,6 @@
 {
   "name": "@rianbotha/react-doc-md",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "A markdown readme generator for React components.",
   "main": "index.js",
   "bin": {
@@ -28,7 +28,7 @@
   "dependencies": {
     "@babel/parser": "^7.4.5",
     "chalk": "^2.4.2",
-    "fast-glob": "^2.2.7",
+    "fast-glob": "^3.0.3",
     "react-docgen": "^4.1.1",
     "uppercamelcase": "^3.0.0",
     "yargs": "^13.2.4"
