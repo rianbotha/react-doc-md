@@ -21,6 +21,11 @@ const buildShapeDoc = (shapes) => {
       doc = addLine(doc);
     }
 
+    if (shape.isShapeObject) {
+      doc = addLine(doc, 'An object of:');
+      doc = addLine(doc);
+    }
+
     if (typeof shape.value !== 'string' && Object.keys(shape.value).length > 0) {
       doc = addLine(doc, '| Property | PropType | Required | Description |');
       doc = addLine(doc, '|----------|----------|----------|-------------|');
@@ -31,16 +36,18 @@ const buildShapeDoc = (shapes) => {
         const { name, required, description = '', defaultValue } = shape.value[prop];
         const isShape = name === 'shape';
         const isShapeArray = name === 'arrayOf' && shape.value[prop].value.name === 'shape';
-        const propName = isShape || isShapeArray ? `[${prop}](#${shape.parent}-${shape.title}-${prop})` : prop;
+        const isShapeObject = name === 'objectOf' && shape.value[prop].value.name === 'shape';
+        const propName = isShape || isShapeArray || isShapeObject ? `[${prop}](#${shape.parent}-${shape.title}-${prop})` : prop;
         doc = addLine(doc, `| ${propName} | ${formatType(shape.value[prop])} | ${required ? 'yes' : ''} | ${nlToBr(description)} |`);
 
-        if (isShape || isShapeArray) {
+        if (isShape || isShapeArray || isShapeObject) {
           nestedShapes.push({
             parent: `${shape.parent}-${shape.title}`,
             title: prop,
-            value: isShapeArray ? shape.value[prop].value.value : shape.value[prop].value,
+            value: isShapeArray || isShapeObject ? shape.value[prop].value.value : shape.value[prop].value,
             description,
             isShapeArray,
+            isShapeObject,
           })
         }
       }
