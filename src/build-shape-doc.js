@@ -21,7 +21,7 @@ const buildShapeDoc = (shapes) => {
       doc = addLine(doc);
     }
 
-    if (Object.keys(shape.value).length > 0) {
+    if (typeof shape.value !== 'string' && Object.keys(shape.value).length > 0) {
       doc = addLine(doc, '| Property | PropType | Required | Description |');
       doc = addLine(doc, '|----------|----------|----------|-------------|');
 
