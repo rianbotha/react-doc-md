@@ -9,6 +9,7 @@ const defaultPlugins = ['jsx', 'flow', 'asyncGenerators', 'bigInt', 'classProper
 const getExportDeclarations = (content) => {
   const ast = babelParser.parse(content, {
     sourceType: 'module', // parse in strict mode and allow module declarations
+    errorRecovery: true,
     plugins: defaultPlugins,
   });
 
