@@ -60,7 +60,7 @@ const buildDoc = (filename, root) => {
           const isShape = type.name === 'shape';
           const isShapeArray = type.name === 'arrayOf' && type.value.name === 'shape';
           const isShapeObject = type.name === 'objectOf' && type.value.name === 'shape';
-          const propName = isShape || isShapeArray || isShapeObject ? `[${name}](#${displayName}-${name})` : name;
+          const propName = isShape || isShapeArray || isShapeObject ? `[${name}](#${displayName.toLowerCase()}-${name.toLowerCase()})` : name;
           doc = addLine(doc, `| ${propName} | ${formatType(type)} | ${required ? 'yes' : ''} | ${defaultValue != null ? `\`${nlToBr(stripComments(defaultValue.value), true)}\`` : ''} | ${nlToBr(description)} |`);
 
           if (isShape || isShapeArray || isShapeObject) {

@@ -6,9 +6,11 @@ const buildShapeDoc = (shapes) => {
   let doc = '';
 
   shapes.forEach((shape) => {
+    const linkId = `${shape.parent}-${shape.title}`.toLowerCase();
     doc = addLine(doc);
     doc = addLine(doc);
-    doc = addLine(doc, `###${(shape.parent.match(/-/g) || []).map(() => '#').join('')} <a name="${shape.parent}-${shape.title}"></a> ${shape.title}`);
+    doc = addLine(doc, `<a id="${linkId}" name="${linkId}"></a>`);
+    doc = addLine(doc, `###${(shape.parent.match(/-/g) || []).map(() => '#').join('')} ${shape.title}`);
     doc = addLine(doc);
 
     if (shape.description) {
@@ -37,7 +39,7 @@ const buildShapeDoc = (shapes) => {
         const isShape = name === 'shape';
         const isShapeArray = name === 'arrayOf' && shape.value[prop].value.name === 'shape';
         const isShapeObject = name === 'objectOf' && shape.value[prop].value.name === 'shape';
-        const propName = isShape || isShapeArray || isShapeObject ? `[${prop}](#${shape.parent}-${shape.title}-${prop})` : prop;
+        const propName = isShape || isShapeArray || isShapeObject ? `[${prop}](#${shape.parent.toLowerCase()}-${shape.title.toLowerCase()}-${prop.toLowerCase()})` : prop;
         doc = addLine(doc, `| ${propName} | ${formatType(shape.value[prop])} | ${required ? 'yes' : ''} | ${nlToBr(description)} |`);
 
         if (isShape || isShapeArray || isShapeObject) {
