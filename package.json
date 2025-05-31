@@ -31,6 +31,6 @@
     "fast-glob": "^3.2.4",
     "react-docgen": "^5.3.1",
     "uppercamelcase": "^3.0.0",
-    "yargs": "^16.1.1"
+    "yargs": "^18.0.0"
   }
 }
